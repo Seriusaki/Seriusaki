@@ -17,7 +17,7 @@ Here are some ideas to get you started:
 
 ## 👨‍💻 Sobre mí
 
-¡Hola! Soy Ángel Gianfranco Valdivia Huayhualla, profesional autodidacta, creativo y con amplia experiencia en relaciones interpersonales y trabajo en equipo, incluso bajo presión. Me especializo en análisis de datos, inteligencia de negocios y automatización de procesos, con certificaciones internacionales como Microsoft Certified Trainer (MCT), MOS, MTA, MCP, entre otras.
+¡Hola! Soy Angel Gianfranco Valdivia Huayhualla, profesional autodidacta, creativo y con amplia experiencia en relaciones interpersonales y trabajo en equipo, incluso bajo presión. Me especializo en análisis de datos, inteligencia de negocios y automatización de procesos, con certificaciones internacionales como Microsoft Certified Trainer (MCT), MOS, MTA, MCP, entre otras.
 
 Actualmente lidero iniciativas de cumplimiento en el sector asegurador, aplicando modelos de scoring y segmentación con Azure ML y R, y optimizando procesos con Power Automate. También soy instructor en herramientas tecnológicas como Power BI, SQL, R y Python, capacitando tanto a nivel corporativo como académico.
 
