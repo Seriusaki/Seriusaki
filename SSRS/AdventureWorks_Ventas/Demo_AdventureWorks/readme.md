@@ -1,4 +1,4 @@
-# 📊 AdventureWorks BI Insights con SSRS
+# 📊 AdventureWorks - BI Insights con SSRS
 
 Este proyecto utiliza la base de datos AdventureWorks para generar reportes analíticos mediante **SQL Server Reporting Services (SSRS)**. Se diseñaron visualizaciones interactivas y tabulares que permiten analizar el rendimiento comercial por país, canal de venta, producto y tienda.
 
