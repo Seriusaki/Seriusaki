@@ -48,13 +48,6 @@ Construir un conjunto de reportes dinámicos en SSRS que faciliten la toma de de
 - AdventureWorks2019
 - GitHub para documentación y control de versiones
 
-## 🚀 Próximos Pasos
-
-- Refinar visualizaciones con parámetros dinámicos
-- Publicar reportes en servidor corporativo o portal web
-- Integrar alertas automatizadas según métricas críticas
-- Explorar migración a Microsoft Fabric para análisis en tiempo real
-
 ## 👤 Autor
 
 **Angel Gianfranco Valdivia Huayhualla**  
