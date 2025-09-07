@@ -37,6 +37,8 @@ Construir un conjunto de reportes dinámicos en SSRS que faciliten la toma de de
 - `CASE`, `IIF()` para clasificación de origen de compra
 - `JOIN` entre múltiples tablas: ventas, territorios, productos, ofertas, tarjetas
 - `COALESCE()` para manejo de valores nulos
+- **CTE (Common Table Expressions)** para estructurar subconsultas reutilizables y mejorar la legibilidad
+- Uso de filtros dinámicos y condiciones temporales para simular escenarios de negocio
 
 ## 🛠️ Tecnologías Utilizadas
 
