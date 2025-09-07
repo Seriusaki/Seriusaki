@@ -49,7 +49,7 @@ Construir un conjunto de reportes dinámicos en SSRS que faciliten la toma de de
 - GitHub para documentación y control de versiones
 
 ### Dashboard
-![Reporte de Ventas](Seriusaki/SSRS/AdventureWorks_Ventas/Demo_AdventureWorks/Inicio1.png)
+![Reporte de Ventas](Inicio1.png)
 
 
 ## 👤 Autor
