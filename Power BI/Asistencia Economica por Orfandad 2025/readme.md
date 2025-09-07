@@ -70,7 +70,7 @@ Estas funciones permiten construir métricas como cantidad de personas ayudadas,
 
 ## ✨ Autor
 
-**Ángel Gianfranco Valdivia Huayhualla**  
+**Angel Gianfranco Valdivia Huayhualla**  
 Microsoft Certified Trainer | Data Analyst | Educational Technologist  
 📍 Lima, Perú  
 🔗 [[LinkedIn](https://www.linkedin.com/in/agvaldivia86)]
