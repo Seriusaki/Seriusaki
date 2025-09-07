@@ -48,6 +48,10 @@ Construir un conjunto de reportes dinámicos en SSRS que faciliten la toma de de
 - AdventureWorks2019
 - GitHub para documentación y control de versiones
 
+### Dashboard
+![Reporte de Ventas](assets/reporte-ventas.png)
+
+
 ## 👤 Autor
 
 **Angel Gianfranco Valdivia Huayhualla**  
