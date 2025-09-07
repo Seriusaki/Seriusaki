@@ -1,0 +1,1100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>17.14.36414.22</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>SSDTRS</am:Name>
+      <am:Version>17.14.36414.22</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2025-09-07T04:26:26.9253079Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="Inicio">
+      <DataSourceReference>AdventureWorks</DataSourceReference>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>f2b9b783-1d65-4575-8140-2d88028a703d</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="Ingreso_Mesual_Empresa">
+      <Query>
+        <DataSourceName>Inicio</DataSourceName>
+        <CommandText>SELECT YEAR(OrderDate) AS OrderYear,MONTH(OrderDate) AS OrderMonth,ROUND(SUM(TotalDue), 2) AS TotalRevenue
+FROM Sales.SalesOrderHeader
+GROUP BY YEAR(OrderDate),MONTH(OrderDate)
+ORDER BY OrderYear DESC,OrderMonth DESC;</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="OrderYear">
+          <DataField>OrderYear</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="OrderMonth">
+          <DataField>OrderMonth</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TotalRevenue">
+          <DataField>TotalRevenue</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="AdventureWorks_01_Inicio">
+      <Query>
+        <DataSourceName>Inicio</DataSourceName>
+        <CommandText>SELECT TOP 1 GETDATE() AS Fecha FROM Sales.SalesOrderHeader </CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Fecha">
+          <DataField>Fecha</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="IngresoMensualPais">
+      <Query>
+        <DataSourceName>Inicio</DataSourceName>
+        <CommandText>SELECT cr.Name AS Country,YEAR(soh.OrderDate) AS OrderYear,MONTH(soh.OrderDate) AS OrderMonth,ROUND(SUM(soh.TotalDue), 2) AS TotalRevenue
+FROM Sales.SalesOrderHeader AS soh 
+INNER JOIN Sales.SalesTerritory AS st ON soh.TerritoryID = st.TerritoryID
+INNER JOIN Person.CountryRegion AS cr ON cr.CountryRegionCode = st.CountryRegionCode
+GROUP BY cr.Name,YEAR(soh.OrderDate),MONTH(soh.OrderDate)
+ORDER BY OrderYear DESC,OrderMonth DESC,Country;</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Country">
+          <DataField>Country</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OrderYear">
+          <DataField>OrderYear</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="OrderMonth">
+          <DataField>OrderMonth</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="TotalRevenue">
+          <DataField>TotalRevenue</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Ingreso Anual</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>18pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>textbox1</rd:DefaultName>
+            <Top>0.34375in</Top>
+            <Left>0.35292in</Left>
+            <Height>0.43in</Height>
+            <Width>3in</Width>
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Chart Name="Chart1">
+            <ChartCategoryHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart1_CategoryGroup">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!OrderYear.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!OrderYear.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!OrderYear.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Label>Total Revenue</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartSeriesHierarchy>
+            <ChartData>
+              <ChartSeriesCollection>
+                <ChartSeries Name="TotalRevenue">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!TotalRevenue.Value)</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style />
+                      </ChartDataLabel>
+                      <ToolTip>=FormatNumber(Sum(Fields!TotalRevenue.Value), 0, True)</ToolTip>
+                      <Style />
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+              </ChartSeriesCollection>
+            </ChartData>
+            <ChartAreas>
+              <ChartArea Name="Default">
+                <ChartCategoryAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <Border>
+                        <Color>Gainsboro</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <Border>
+                        <Color>Gainsboro</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartCategoryAxes>
+                <ChartValueAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <Border>
+                        <Color>Gainsboro</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0,,.00;(#,0,,.00)</Format>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <Border>
+                        <Color>Gainsboro</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartValueAxes>
+                <Style>
+                  <BackgroundColor>#00ffffff</BackgroundColor>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                </Style>
+              </ChartArea>
+            </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Default">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>Segoe UI Light</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <Position>BottomCenter</Position>
+                <DockOutsideChartArea>true</DockOutsideChartArea>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <ChartTitles>
+              <ChartTitle Name="Title1">
+                <Caption>(en millones de dolares)</Caption>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>Segoe UI Light</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextAlign>General</TextAlign>
+                  <VerticalAlign>Top</VerticalAlign>
+                </Style>
+              </ChartTitle>
+            </ChartTitles>
+            <Palette>Pacific</Palette>
+            <ChartBorderSkin>
+              <Style>
+                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <Color>White</Color>
+              </Style>
+            </ChartBorderSkin>
+            <ChartNoDataMessage Name="NoDataMessage">
+              <Caption>Sin datos disponibles</Caption>
+              <Style>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <FontWeight>Bold</FontWeight>
+                <TextAlign>General</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </ChartNoDataMessage>
+            <DataSetName>Ingreso_Mesual_Empresa</DataSetName>
+            <Top>0.84319in</Top>
+            <Left>0.35292in</Left>
+            <Height>2.27337in</Height>
+            <Width>3in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Color>LightGrey</Color>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </Chart>
+          <Textbox Name="textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Ingreso por País</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>18pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>textbox1</rd:DefaultName>
+            <Top>0.34375in</Top>
+            <Left>4.08766in</Left>
+            <Height>0.43in</Height>
+            <Width>2.95276in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Chart Name="Chart4">
+            <ChartCategoryHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart4_CategoryGroup">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Country.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!TotalRevenue.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!Country.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart4_SeriesGroup">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Country.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!TotalRevenue.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!Country.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartSeriesHierarchy>
+            <ChartData>
+              <ChartSeriesCollection>
+                <ChartSeries Name="TotalRevenue">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!TotalRevenue.Value)</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <FontFamily>Segoe UI Light</FontFamily>
+                          <FontSize>8pt</FontSize>
+                          <Format>#,0,,.0;(#,0,,.0)</Format>
+                        </Style>
+                        <UseValueAsLabel>true</UseValueAsLabel>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <Style />
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Bar</Type>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+              </ChartSeriesCollection>
+            </ChartData>
+            <ChartAreas>
+              <ChartArea Name="Default">
+                <ChartCategoryAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <Border>
+                        <Color>Gainsboro</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <Border>
+                        <Color>Gainsboro</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartCategoryAxes>
+                <ChartValueAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <Border>
+                        <Color>Gainsboro</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Format>#,0,,;(#,0,,)</Format>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <Border>
+                        <Color>Gainsboro</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartValueAxes>
+                <Style>
+                  <BackgroundColor>#00ffffff</BackgroundColor>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                </Style>
+              </ChartArea>
+            </ChartAreas>
+            <ChartTitles>
+              <ChartTitle Name="Title1">
+                <Caption>(en millones de dolares)</Caption>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontFamily>Segoe UI Light</FontFamily>
+                  <FontSize>8pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextAlign>General</TextAlign>
+                  <VerticalAlign>Top</VerticalAlign>
+                </Style>
+              </ChartTitle>
+            </ChartTitles>
+            <Palette>Pacific</Palette>
+            <ChartBorderSkin>
+              <Style>
+                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <Color>White</Color>
+              </Style>
+            </ChartBorderSkin>
+            <ChartNoDataMessage Name="NoDataMessage">
+              <Caption>Sin datos disponibles</Caption>
+              <Style>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <FontWeight>Bold</FontWeight>
+                <TextAlign>General</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </ChartNoDataMessage>
+            <DataSetName>IngresoMensualPais</DataSetName>
+            <Top>2.22171cm</Top>
+            <Left>10.38266cm</Left>
+            <Height>5.69435cm</Height>
+            <Width>7.5cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Color>LightGrey</Color>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </Chart>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TOP 10 - Productos mas Vendidos</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>18pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox10</rd:DefaultName>
+            <Top>8.44495cm</Top>
+            <Left>0.89641cm</Left>
+            <Height>1.09389cm</Height>
+            <Width>7.62cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>9.67995cm</Height>
+        <Style />
+      </Body>
+      <Width>18.87391cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>2.54cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Image Name="Logo">
+              <Source>Embedded</Source>
+              <Value>adventureworkslogo</Value>
+              <Sizing>FitProportional</Sizing>
+              <Left>0.125in</Left>
+              <Height>0.95833in</Height>
+              <Width>1in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+            <Textbox Name="Textbox6">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Insights Adventure Works</Value>
+                      <Style>
+                        <FontFamily>Segoe UI Light</FontFamily>
+                        <FontSize>20pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox6</rd:DefaultName>
+              <Top>0.32167in</Top>
+              <Left>1.23833in</Left>
+              <Height>0.45833in</Height>
+              <Width>3.38542in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox7">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Ejecutado:</Value>
+                      <Style>
+                        <FontFamily>Segoe UI Light</FontFamily>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox7</rd:DefaultName>
+              <Top>0.75in</Top>
+              <Left>4.67583in</Left>
+              <Height>0.25in</Height>
+              <Width>0.71875in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="ExecutionTime">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ExecutionTime</Value>
+                      <Style>
+                        <FontFamily>Segoe UI Light</FontFamily>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+              <Top>0.75in</Top>
+              <Left>5.39458in</Left>
+              <Height>0.25in</Height>
+              <Width>1.64583in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>2.54cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>27.94cm</PageHeight>
+        <PageWidth>21.59cm</PageWidth>
+        <LeftMargin>2.54cm</LeftMargin>
+        <RightMargin>2.54cm</RightMargin>
+        <TopMargin>2.54cm</TopMargin>
+        <BottomMargin>2.54cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>3</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <EmbeddedImages>
+    <EmbeddedImage Name="adventureworkslogo">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <Language>es-ES</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>4d291679-9063-4841-8976-44059542b59c</rd:ReportID>
+</Report>

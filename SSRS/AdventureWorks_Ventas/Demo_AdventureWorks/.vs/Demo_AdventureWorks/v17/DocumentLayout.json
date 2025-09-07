@@ -1,0 +1,52 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\pc\\source\\repos\\Demo_AdventureWorks\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{586A929C-0C73-7A16-89FA-F250C40C50E7}|Demo_AdventureWorks.rptproj|C:\\Users\\pc\\source\\repos\\Demo_AdventureWorks\\Inicio.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{586A929C-0C73-7A16-89FA-F250C40C50E7}|Demo_AdventureWorks.rptproj|solutionrelative:Inicio.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{586A929C-0C73-7A16-89FA-F250C40C50E7}|Demo_AdventureWorks.rptproj|C:\\Users\\pc\\source\\repos\\Demo_AdventureWorks\\Reporte.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{586A929C-0C73-7A16-89FA-F250C40C50E7}|Demo_AdventureWorks.rptproj|solutionrelative:Reporte.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Reporte.rdl [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\pc\\source\\repos\\Demo_AdventureWorks\\Reporte.rdl",
+              "RelativeDocumentMoniker": "Reporte.rdl",
+              "ToolTip": "C:\\Users\\pc\\source\\repos\\Demo_AdventureWorks\\Reporte.rdl [Dise\u00F1o]",
+              "RelativeToolTip": "Reporte.rdl [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-07T06:36:58.704Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Inicio.rdl [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\pc\\source\\repos\\Demo_AdventureWorks\\Inicio.rdl",
+              "RelativeDocumentMoniker": "Inicio.rdl",
+              "ToolTip": "C:\\Users\\pc\\source\\repos\\Demo_AdventureWorks\\Inicio.rdl [Dise\u00F1o]",
+              "RelativeToolTip": "Inicio.rdl [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-07T04:27:14.847Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
