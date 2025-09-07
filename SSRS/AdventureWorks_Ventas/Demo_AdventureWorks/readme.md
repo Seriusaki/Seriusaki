@@ -50,7 +50,10 @@ Construir un conjunto de reportes dinámicos en SSRS que faciliten la toma de de
 
 ### Dashboard
 ![Reporte de Ventas](Inicio1.png)
+![Reporte de Ventas](Inicio2.png)
 
+### Reporte
+![Reporte de Ventas](Reporte.png)
 
 ## 👤 Autor
 
