@@ -59,22 +59,12 @@ Este proyecto demuestra cómo **alojar un sitio web estático en Amazon S3**, ap
 
 
 
----
+
 
 ## ✅ Resultado Final
 
 El sitio web fue **publicado exitosamente** y es accesible públicamente.  
 El proceso permitió comprender cómo AWS gestiona **permisos, hosting y distribución de contenido**.
-
----
-
-## 📸 Vista Previa del Sitio
-
-<p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Amazon_S3_logo.svg" width="120" alt="AWS S3 Logo" />
-</p>
-
-> *(Reemplaza esta imagen con una captura real de tu sitio cuando esté en línea, por ejemplo: `/assets/preview.png`)*
 
 ---
 
@@ -85,17 +75,10 @@ El proceso permitió comprender cómo AWS gestiona **permisos, hosting y distrib
 
 ---
 
-## 🔗 Enlaces Útiles
-
-- 🌍 [NextWork Community](https://community.nextwork.org)  
-- 💬 [Discusión del Proyecto](https://community.nextwork.org/c/i-have-a-question?automatic_login=true)
-
----
-
 ## 👨‍💻 Autor
 
-**Ángel G. Valdivia H.**  
-NextWork Student | Data & Cloud Enthusiast  
+**Angel G. Valdivia H.**  
+Data & Cloud Enthusiast  
 📧 agvaldivia86@gmail.com
 
 ---
