@@ -102,8 +102,10 @@ La gestión de IAM forma parte esencial de toda **estrategia de Data Governance 
 ## 👨‍💻 Autor
 
 **Angel G. Valdivia H.**  
-Data & Cloud Specialist  
+Data & Cloud Specialist | Microsoft Certified Trainer | Data Analyst | Educational Technologist  
+📍 Lima, Perú  
 📧 agvaldivia86@gmail.com  
+🔗 [[LinkedIn](https://www.linkedin.com/in/agvaldivia86)]
 
 ---
 

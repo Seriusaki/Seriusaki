@@ -71,8 +71,9 @@ Estas funciones permiten construir métricas como cantidad de personas ayudadas,
 ## ✨ Autor
 
 **Angel Gianfranco Valdivia Huayhualla**  
-Microsoft Certified Trainer | Data Analyst | Educational Technologist  
+Data & Cloud Specialist | Microsoft Certified Trainer | Data Analyst | Educational Technologist  
 📍 Lima, Perú  
+📧 agvaldivia86@gmail.com  
 🔗 [[LinkedIn](https://www.linkedin.com/in/agvaldivia86)]
 
 ---
