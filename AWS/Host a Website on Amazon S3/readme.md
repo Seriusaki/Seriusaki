@@ -78,8 +78,10 @@ El proceso permitió comprender cómo AWS gestiona **permisos, hosting y distrib
 ## 👨‍💻 Autor
 
 **Angel G. Valdivia H.**  
-Data & Cloud Enthusiast  
-📧 agvaldivia86@gmail.com
+Data & Cloud Specialist | Microsoft Certified Trainer | Data Analyst | Educational Technologist | Especialista en SQL, SSRS, Power Query y automatización de procesos
+📍 Lima, Perú  
+📧 agvaldivia86@gmail.com  
+🔗 [[LinkedIn](https://www.linkedin.com/in/agvaldivia86)]
 
 ---
 

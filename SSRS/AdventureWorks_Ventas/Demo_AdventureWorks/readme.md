@@ -58,6 +58,7 @@ Construir un conjunto de reportes dinámicos en SSRS que faciliten la toma de de
 ## 👤 Autor
 
 **Angel Gianfranco Valdivia Huayhualla**  
-Microsoft Certified Trainer | Data Analyst | Educational Technologist  
+Data & Cloud Specialist | Microsoft Certified Trainer | Data Analyst | Educational Technologist | Especialista en SQL, SSRS, Power Query y automatización de procesos
 📍 Lima, Perú  
-🎓 Especialista en SQL, SSRS, Power Query y automatización de procesos
+📧 agvaldivia86@gmail.com  
+🔗 [[LinkedIn](https://www.linkedin.com/in/agvaldivia86)]
