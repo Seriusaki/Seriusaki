@@ -58,6 +58,5 @@ Actualmente lidero iniciativas de cumplimiento en el sector asegurador, aplicand
 - 🤔 Buscando ayuda en: Estrategias de contenido para YouTube y optimización de flujos en Power Platform  
 - 💬 Pregúntame sobre: Power BI, Azure ML, automatización, ciencia de datos y formación técnica  
 - 📫 Cómo contactarme: agvaldivia86@hotmail.com  
-- 😄 Pronombres: él/he/him  
 - ⚡ Dato curioso: Enseño conceptos técnicos usando referencias de ciencia ficción como Star Trek y Stargate 🚀
 
